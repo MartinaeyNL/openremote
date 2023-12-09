@@ -2,7 +2,7 @@ import {css, html, PropertyValues, TemplateResult } from "lit";
 import { customElement } from "lit/decorators.js";
 import {OrAssetWidget} from "../util/or-asset-widget";
 import {WidgetManifest} from "../util/or-widget";
-import {WidgetConfig} from "../util/widget-config";
+import {AssetWidgetConfig, WidgetConfig} from "../util/widget-config";
 import {WidgetSettings} from "../util/widget-settings";
 import {TableSettings} from "../settings/table-settings";
 import {OrMwcTableRowClickEvent, TableColumn, TableRow, TableConfig} from "@openremote/or-mwc-components/or-mwc-table";
@@ -10,7 +10,7 @@ import {i18next} from "@openremote/or-translate";
 import {Util} from "@openremote/core";
 import {Asset, AssetModelUtil} from "@openremote/model";
 
-export interface TableWidgetConfig extends WidgetConfig {
+export interface TableWidgetConfig extends AssetWidgetConfig {
     assetType?: string
     assetIds: string[]
     attributeNames: string[],

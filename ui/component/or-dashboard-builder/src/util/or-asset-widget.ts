@@ -4,7 +4,7 @@ import { state } from "lit/decorators.js";
 import manager from "@openremote/core";
 import {i18next} from "@openremote/or-translate";
 import { showSnackbar } from "@openremote/or-mwc-components/or-mwc-snackbar";
-import {WidgetConfig} from "./widget-config";
+import {AssetWidgetConfig, WidgetConfig} from "./widget-config";
 import {WidgetSettings} from "./widget-settings";
 import { CSSResult } from "lit";
 
@@ -17,6 +17,8 @@ import { CSSResult } from "lit";
 * */
 export abstract class OrAssetWidget extends OrWidget {
 
+    protected readonly widgetConfig!: AssetWidgetConfig;
+
     @state() // cached assets
     protected loadedAssets: Asset[] = [];
 
@@ -25,6 +27,14 @@ export abstract class OrAssetWidget extends OrWidget {
 
     static get styles(): CSSResult[] {
         return [...super.styles];
+    }
+
+    public notifyAttributeUpdate(attrRef: AttributeRef) {
+        const ref = this.widgetConfig.attributeRefs?.find(r => r.id === attrRef.id && r.name === attrRef.name);
+        if(ref) {
+            console.log(`Updating!`);
+            this.refreshContent(false);
+        }
     }
 
     // Fetching the assets according to the AttributeRef[] input in DashboardWidget if required.

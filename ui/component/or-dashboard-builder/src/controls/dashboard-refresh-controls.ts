@@ -10,6 +10,7 @@ import {DashboardRefreshInterval} from "@openremote/model";
 export function intervalToMillis(interval: DashboardRefreshInterval): number | undefined {
     switch (interval) {
         case DashboardRefreshInterval.OFF:
+        case DashboardRefreshInterval.LIVE:
             return undefined;
         case DashboardRefreshInterval.ONE_MIN:
             return (60 * 1000);
@@ -47,7 +48,7 @@ export class DashboardRefreshControls extends LitElement {
     protected readonly = true;
 
     // TODO: Replace this with Object.values(), after generated typescript enums support this. ('const' variable issue in model.ts)
-    protected intervalOptions = [DashboardRefreshInterval.OFF, DashboardRefreshInterval.ONE_MIN, DashboardRefreshInterval.FIVE_MIN, DashboardRefreshInterval.QUARTER, DashboardRefreshInterval.ONE_HOUR]
+    protected intervalOptions = [DashboardRefreshInterval.OFF, DashboardRefreshInterval.LIVE, DashboardRefreshInterval.ONE_MIN, DashboardRefreshInterval.FIVE_MIN, DashboardRefreshInterval.QUARTER, DashboardRefreshInterval.ONE_HOUR]
 
     protected willUpdate(changedProps: PropertyValues) {
         super.willUpdate(changedProps);

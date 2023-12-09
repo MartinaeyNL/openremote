@@ -284,6 +284,7 @@ export class OrDashboardBuilder extends LitElement {
     protected dashboardPreview?: OrDashboardPreview;
 
     protected refreshTimer?: NodeJS.Timer;
+    protected refreshSub?: string;
     private readonly keyEmitter: DashboardKeyEmitter = new DashboardKeyEmitter();
 
 
@@ -363,13 +364,24 @@ export class OrDashboardBuilder extends LitElement {
 
         // When refresh interval has changed
         if(changedProps.has("refreshInterval") && this.refreshInterval) {
-            this.setRefreshTimer(intervalToMillis(this.refreshInterval));
+            this.setRefreshTimer(this.refreshInterval === DashboardRefreshInterval.LIVE ? 'live' : intervalToMillis(this.refreshInterval));
         }
     }
 
-    protected setRefreshTimer(millis: number | undefined) {
+    protected async setRefreshTimer(millis: number | undefined | 'live') {
         this.clearRefreshTimer();
-        if(millis !== undefined) {
+        if(millis === 'live') {
+            if(manager.events) {
+                this.refreshSub = await manager.events.subscribeAttributeEvents(undefined as any, false, (ev) => {
+                    if(ev.realm === manager.displayRealm && ev.attributeState?.ref) {
+                        this.dashboardPreview!.notifyAttributeUpdate(ev.attributeState.ref);
+                    }
+                })
+            } else {
+                console.error("Error during registration of LIVE timer.")
+            }
+        }
+        else if(millis !== undefined) {
             this.refreshTimer = setInterval(() => {
                 this.deselectWidget();
                 this.dashboardPreview?.refreshWidgets();
@@ -381,6 +393,12 @@ export class OrDashboardBuilder extends LitElement {
         if(this.refreshTimer) {
             clearInterval(this.refreshTimer);
             this.refreshTimer = undefined;
+        }
+        if(this.refreshSub) {
+            if(manager.events) {
+                manager.events.unsubscribe(this.refreshSub);
+            }
+            this.refreshSub = undefined;
         }
     }
 

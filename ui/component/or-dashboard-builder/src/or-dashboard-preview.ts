@@ -4,7 +4,7 @@ import {customElement, property, state} from "lit/decorators.js";
 import {style} from "./style";
 import "./or-dashboard-widgetcontainer";
 import {debounce} from "lodash";
-import {DashboardGridItem, DashboardScalingPreset, DashboardScreenPreset, DashboardTemplate, DashboardWidget} from "@openremote/model";
+import {AttributeRef, DashboardGridItem, DashboardScalingPreset, DashboardScreenPreset, DashboardTemplate, DashboardWidget} from "@openremote/model";
 import {getActivePreset} from "./index";
 import {InputType, OrInputChangedEvent} from "@openremote/or-mwc-components/or-mwc-input";
 import "@openremote/or-components/or-loading-indicator";
@@ -437,6 +437,15 @@ export class OrDashboardPreview extends LitElement {
             const widgetContainer = gridItem.querySelector(OrDashboardWidgetContainer.tagName) as OrDashboardWidgetContainer | null;
             if(widgetContainer) {
                 widgetContainer.refreshContent(false);
+            }
+        })
+    }
+
+    public notifyAttributeUpdate(attrRef: AttributeRef) {
+        this.grid?.getGridItems().forEach(gridItem => {
+            const widgetContainer = gridItem.querySelector(OrDashboardWidgetContainer.tagName) as OrDashboardWidgetContainer | null;
+            if(widgetContainer) {
+                widgetContainer.notifyAttributeUpdate(attrRef);
             }
         })
     }
