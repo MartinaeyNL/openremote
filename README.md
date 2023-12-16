@@ -4,8 +4,8 @@
 
 [Source](https://github.com/openremote/openremote) **·** [Documentation](https://github.com/openremote/openremote/wiki) **·** [Issues](https://github.com/martinaeynl/openremote/issues) **·** [OpenRemote Inc.](https://openremote.io)
 
-Hi! I'm Martin, one of the Developers at OpenRemote, which is an intuitive user-friendly 100% open source IoT platform.<br />
-For personal use at home, I was looking for more customizable widgets to use for monitoring / controlling third party applications.<br />
+Hi! I'm Martin, one of the Developers at OpenRemote, which is an intuitive 100% open source IoT platform.<br />
+For personal use at home, I was looking for more widgets to use for monitoring/ controlling third party applications.<br />
 So here we are, a fork with some extra functionality! 😉
 
 
