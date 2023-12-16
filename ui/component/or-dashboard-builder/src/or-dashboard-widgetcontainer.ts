@@ -4,10 +4,11 @@ import {customElement, property, query, state} from "lit/decorators.js";
 import {when} from "lit/directives/when.js";
 import {throttle} from "lodash";
 import {style} from "./style";
-import {DashboardWidget} from "@openremote/model";
+import {AttributeRef, DashboardWidget} from "@openremote/model";
 import {OrWidget, WidgetManifest} from "./util/or-widget";
 import {WidgetService} from "./service/widget-service";
 import {WidgetConfig} from "./util/widget-config";
+import {OrAssetWidget} from "./util/or-asset-widget";
 
 /* ------------------------------------ */
 
@@ -153,5 +154,12 @@ export class OrDashboardWidgetContainer extends LitElement {
 
     public refreshContent(force: boolean) {
         this.orWidget?.refreshContent(force);
+    }
+
+    public notifyAttributeUpdate(attrRef: AttributeRef) {
+        const assetWidget = this.orWidget as OrAssetWidget;
+        if(assetWidget.notifyAttributeUpdate !== undefined) {
+            assetWidget.notifyAttributeUpdate(attrRef);
+        }
     }
 }
