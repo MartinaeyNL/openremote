@@ -388,7 +388,7 @@ export class OrDashboardPreview extends LitElement {
                     appendTo: 'parent', // Required to work, seems to be Shadow DOM related.
                 },
                 float: true,
-                margin: 5,
+                margin: 2,
                 resizable: {
                     handles: 'all'
                 },

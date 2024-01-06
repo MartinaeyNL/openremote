@@ -32,7 +32,7 @@ export abstract class OrAssetWidget extends OrWidget {
     public notifyAttributeUpdate(attrRef: AttributeRef) {
         const ref = this.widgetConfig.attributeRefs?.find(r => r.id === attrRef.id && r.name === attrRef.name);
         if(ref) {
-            console.log(`Updating!`);
+            console.log(`Processing attribute update for Widget ${this.getDisplayName?.() || ''}`);
             this.refreshContent(false);
         }
     }

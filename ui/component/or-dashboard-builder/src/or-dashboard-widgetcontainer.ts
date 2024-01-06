@@ -129,7 +129,7 @@ export class OrDashboardWidgetContainer extends LitElement {
     protected render() {
         const showHeader = !!this.widget.displayName;
         return html`
-            <div id="widget-container" style="height: calc(100% - 16px); padding: 8px 16px 8px 16px; display: flex; flex-direction: column;">
+            <div id="widget-container" style="height: calc(100% - 8px); padding: 4px 8px 4px 8px; display: flex; flex-direction: column;">
 
                 <!-- Container title -->
                 ${when(showHeader, () => html`
