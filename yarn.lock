@@ -2249,6 +2249,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@openremote/graphics@workspace:ui/app/graphics":
+  version: 0.0.0-use.local
+  resolution: "@openremote/graphics@workspace:ui/app/graphics"
+  dependencies:
+    "@openremote/or-app": ^1.1.0
+    "@openremote/util": "workspace:*"
+    "@rive-app/canvas": ^2.11.1
+  languageName: unknown
+  linkType: soft
+
 "@openremote/insights@workspace:ui/app/insights":
   version: 0.0.0-use.local
   resolution: "@openremote/insights@workspace:ui/app/insights"
@@ -2767,6 +2777,13 @@ __metadata:
     react-redux:
       optional: true
   checksum: be5cdea975a8a631fe2d88cafc7077554c7bc3621a4a7031556cc17e5dec26359018f2614c325895e7ab50865f5c511025d1e589ca01de7e2bd88d95e0a1a963
+  languageName: node
+  linkType: hard
+
+"@rive-app/canvas@npm:^2.11.1":
+  version: 2.11.1
+  resolution: "@rive-app/canvas@npm:2.11.1"
+  checksum: fc3c6409f66522c6b48a0e51f1a27fe224dc3648de86cf4c0d11772361d3bf5298935a20ee4dac6ceea11dfa266916ba65ca3f524d44c35ddf85a5020f6c98e1
   languageName: node
   linkType: hard
 
