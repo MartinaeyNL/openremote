@@ -38,6 +38,10 @@ dependencies {
     implementation "org.eclipse.angus:angus-mail:$jakartaMailVersion"
 
     implementation "org.jdom:jdom2:$jdomVersion"
+
+    implementation "com.github.twitch4j:twitch4j:$twitch4jVersion"
+
+    implementation "com.github.philippheuer.events4j:events4j-handler-reactor:$twitchEvents4jVersion"
 }
 
 jar {

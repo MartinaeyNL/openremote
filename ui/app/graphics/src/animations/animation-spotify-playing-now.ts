@@ -18,8 +18,8 @@ export class AnimationSpotifyPlayingNow extends AnimationComponent {
 
     getLiveAttributeRefs(): AttributeRef[] {
         return [
-            { id: '6i1IpeWsSQ71vuQhQ5rvZh', name: "current_song_artist" },
-            { id: '6i1IpeWsSQ71vuQhQ5rvZh', name: "current_song_name" }
+            { id: '6MLbfUrOF49QeowOStSXlP', name: "current_song_artist" },
+            { id: '6MLbfUrOF49QeowOStSXlP', name: "current_song_name" }
         ];
     }
 
