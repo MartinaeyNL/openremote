@@ -287,8 +287,10 @@ export class OrDashboardBuilder extends LitElement {
     @query('or-dashboard-preview')
     protected dashboardPreview?: OrDashboardPreview;
 
-    protected refreshTimer?: NodeJS.Timer;
     protected refreshSub?: string;
+
+    protected refreshTimer?: ReturnType<typeof setInterval>;
+
     private readonly keyEmitter: DashboardKeyEmitter = new DashboardKeyEmitter();
 
 
@@ -377,8 +379,8 @@ export class OrDashboardBuilder extends LitElement {
         if(millis === 'live') {
             if(manager.events) {
                 this.refreshSub = await manager.events.subscribeAttributeEvents(undefined as any, false, (ev) => {
-                    if(ev.realm === manager.displayRealm && ev.attributeState?.ref) {
-                        this.dashboardPreview!.notifyAttributeUpdate(ev.attributeState.ref);
+                    if(ev.realm === manager.displayRealm && ev.ref) {
+                        this.dashboardPreview!.notifyAttributeUpdate(ev.ref);
                     }
                 })
             } else {
@@ -412,7 +414,7 @@ export class OrDashboardBuilder extends LitElement {
         await manager.rest.api.DashboardResource.getAllRealmDashboards(realm).then((result) => {
             this.dashboards = result.data;
         }).catch((reason) => {
-            showSnackbar(undefined, i18next.t('errorOccurred'));
+            showSnackbar(undefined, "errorOccurred");
             console.error(reason);
         });
 
@@ -526,17 +528,17 @@ export class OrDashboardBuilder extends LitElement {
                     this.initialTemplateJSON = JSON.stringify(this.selectedDashboard.template);
                     this.dashboards[this.dashboards?.indexOf(this.selectedDashboard)] = this.selectedDashboard;
                     this.currentTemplate = Object.assign({}, this.selectedDashboard.template);
-                    showSnackbar(undefined, i18next.t('dashboard.saveSuccessful'));
+                    showSnackbar(undefined, "dashboard.saveSuccessful");
                 }
             }).catch((reason) => {
                 console.error(reason);
-                showSnackbar(undefined, i18next.t('errorOccurred'));
+                showSnackbar(undefined, "errorOccurred");
             }).finally(() => {
                 this.isLoading = false;
             })
         } else {
             console.error("The selected dashboard could not be found..");
-            showSnackbar(undefined, i18next.t('errorOccurred'));
+            showSnackbar(undefined, "errorOccurred");
         }
     }
 
@@ -613,10 +615,10 @@ export class OrDashboardBuilder extends LitElement {
                                             <or-mwc-input id="share-btn" class="small-btn" .disabled="${this.isLoading}" type="${InputType.BUTTON}" icon="open-in-new"
                                                           @or-mwc-input-changed="${() => { this.openDashboardInInsights(); }}">
                                             </or-mwc-input>
-                                            <or-mwc-input id="save-btn" ?hidden="${this._isReadonly() || !this._hasEditAccess()}" .disabled="${this.isLoading || !this.hasChanged}" type="${InputType.BUTTON}" raised label="${i18next.t('save')}"
+                                            <or-mwc-input id="save-btn" ?hidden="${this._isReadonly() || !this._hasEditAccess()}" .disabled="${this.isLoading || !this.hasChanged}" type="${InputType.BUTTON}" raised label="save"
                                                           @or-mwc-input-changed="${() => { this.saveDashboard(); }}">
                                             </or-mwc-input>
-                                            <or-mwc-input id="view-btn" ?hidden="${this._isReadonly() || !this._hasViewAccess()}" type="${InputType.BUTTON}" outlined icon="eye" label="${i18next.t('viewAsset')}"
+                                            <or-mwc-input id="view-btn" ?hidden="${this._isReadonly() || !this._hasViewAccess()}" type="${InputType.BUTTON}" outlined icon="eye" label="viewAsset"
                                                           @or-mwc-input-changed="${() => { this.dispatchEvent(new CustomEvent('editToggle', { detail: false })); }}">
                                             </or-mwc-input>
                                         `)}
@@ -644,7 +646,7 @@ export class OrDashboardBuilder extends LitElement {
                                             <or-mwc-input id="share-btn" class="small-btn" .disabled="${(this.selectedDashboard == null)}" type="${InputType.BUTTON}" icon="open-in-new"
                                                           @or-mwc-input-changed="${() => { this.openDashboardInInsights(); }}"
                                             ></or-mwc-input>
-                                            <or-mwc-input id="view-btn" class="hideMobile" ?hidden="${this.selectedDashboard == null || this._isReadonly() || !this._hasEditAccess()}" type="${InputType.BUTTON}" outlined icon="pencil" label="${i18next.t('editAsset')}"
+                                            <or-mwc-input id="view-btn" class="hideMobile" ?hidden="${this.selectedDashboard == null || this._isReadonly() || !this._hasEditAccess()}" type="${InputType.BUTTON}" outlined icon="pencil" label="editAsset"
                                                           @or-mwc-input-changed="${() => { this.dispatchEvent(new CustomEvent('editToggle', { detail: true })); }}">
                                             </or-mwc-input>
                                         `)}

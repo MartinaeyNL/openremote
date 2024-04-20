@@ -24,11 +24,11 @@ export class AnimationSpotifyPlayingNow extends AnimationComponent {
     }
 
     onAttributeUpdate(ev: AttributeEvent) {
-        const ref = this.getLiveAttributeRefs().find(r => r.id === ev.attributeState.ref.id && r.name === ev.attributeState.ref.name);
+        const ref = this.getLiveAttributeRefs().find(r => r.id === ev.ref.id && r.name === ev.ref.name);
         if(ref) {
-            switch (ev.attributeState.ref.name) {
-                case "current_song_artist": this.artistTitle = ev.attributeState.value; break;
-                case "current_song_name": this.songTitle = ev.attributeState.value; break;
+            switch (ev.ref.name) {
+                case "current_song_artist": this.artistTitle = ev.value; break;
+                case "current_song_name": this.songTitle = ev.value; break;
                 default: return;
             }
         }

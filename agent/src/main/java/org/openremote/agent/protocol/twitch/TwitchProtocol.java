@@ -32,7 +32,7 @@ public class TwitchProtocol extends AbstractProtocol<TwitchAgent, TwitchAgentLin
     }
 
     @Override
-    protected void doLinkedAttributeWrite(Attribute<?> attribute, TwitchAgentLink agentLink, AttributeEvent event, Object processedValue) {
+    protected void doLinkedAttributeWrite(TwitchAgentLink agentLink, AttributeEvent event, Object processedValue) {
 
     }
 
